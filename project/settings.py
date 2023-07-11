@@ -40,8 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
-    'crispy_forms', #used to customize the forms using frontend stylesheets
+    # crispy-forms used to customize the forms using frontend stylesheets
+    'crispy_forms', 
     'crispy_bootstrap5',
+    # all-auth
+    'allauth',
+    'allauth.account', 
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -147,8 +152,32 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
 
 # Crispy-Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# django-allauth config
+SITE_ID = 1 
+
+# Under the hood Django sets this which is used when Django attempts to authenticate a user.
+
+AUTHENTICATION_BACKENDS = (
+'django.contrib.auth.backends.ModelBackend',
+'allauth.account.auth_backends.AuthenticationBackend', 
+)
+
+# save seesion so user don't need to login again
+ACCOUNT_SESSION_REMEMBER = True
+# only ask for a password once
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+ACCOUNT_USERNAME_REQUIRED=False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNIQUE_EMAIL=True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
