@@ -1,4 +1,6 @@
 {% extends '_base.html' %}
+{% load static %}
+{% load socialaccount %}
 {% load crispy_forms_tags %}
 {% block title %}Sign Up{% endblock title %}
 {% block content %}
@@ -6,6 +8,24 @@
 <form method="post">
   {% csrf_token %}
   {{ form|crispy }}
-  <button class="btn btn-success" type="submit">Sign Up</button>
+
+  <table><tr>
+    <td style="width:47%"><hr/></td>
+    <td style="vertical-align:middle; text-align:center">OR</td>
+    <td style="width:47%"><hr/></td>
+    </tr></table>
+
+  <div>
+    <button class="btn btn-primary">
+      <a href="{% provider_login_url 'github' %}" 
+      style="text-decoration: none; color: white;">Github</a></button>
+    <button class="btn btn-primary">Facebook</button>
+    <button class="btn btn-primary">Google</button>
+  </div>
+
+  
+
+  
+  <div class="pt-5"><button class="btn btn-success ps-5 pe-5 pt-2 pb-2"  type="submit">Sign Up</button></div>
 </form>
 {% endblock content %}

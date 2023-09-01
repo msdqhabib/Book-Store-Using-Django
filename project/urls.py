@@ -22,6 +22,7 @@ urlpatterns = [
     
     #User Management
     path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.socialaccount.urls')),
 
     #Local appps
     path('', include('pages.urls')),

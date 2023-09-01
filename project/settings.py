@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'django.contrib.sites',
     # crispy-forms used to customize the forms using frontend stylesheets
     'crispy_forms', 
     'crispy_bootstrap5',
@@ -47,7 +48,19 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account', 
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+            'APP': {
+            'client_id': '7f72327351225e874f7b',
+            'secret': '14260a379e7fc9f7468746070349e70cb78505cd',
+            'key': ''
+        }
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -179,5 +192,16 @@ ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_UNIQUE_EMAIL=True
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+# Email Configuration
+# DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'msdqhabib@gmail.com'
+EMAIL_HOST_USER = 'msdqhabib@gmail.com'
+EMAIL_HOST_PASSWORD = 'pptvjgnksbmodzph'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
 
